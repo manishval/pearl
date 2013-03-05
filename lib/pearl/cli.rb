@@ -80,7 +80,7 @@ module Pearl
               size_id = size.to_i
               raise 'Error: Invalid size id.' if size_id == 0 || !size_id.is_a?(Fixnum)
 
-              name = command.split(' ', 2)
+              name = command.split(' ', 3)[2]
               raise 'Error: Invalid droplet name.' if name.nil? || name.length <= 0
 
               options = { name: name,  image_id: image_id, region_id: region_id, size_id: size_id }

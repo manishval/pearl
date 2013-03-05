@@ -21,13 +21,17 @@ module Pearl
 
       auth_params = { client_id: self.client_id, api_key: self.api_key }
 
-      if params.nil?
+      if params.nil? || params.empty?
         params = auth_params
       else
-        params.merge(auth_params)
+        params.merge!(auth_params)
       end  
 
       uri.query = URI.encode_www_form(params)
+
+      puts params
+      puts auth_params
+      puts uri.to_s
 
       request = Net::HTTP::Get.new(uri.request_uri)
 
