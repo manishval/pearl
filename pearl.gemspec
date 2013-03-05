@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["manishval@hotmail.com"]
   spec.description   = "Command line interface for DigitalOcean's API"
   spec.summary       = spec.description
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/manishval/pearl"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.executables   = pearl
+  spec.executables   = "pearl"
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
