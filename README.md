@@ -1,12 +1,17 @@
 # Pearl
 
-Pearl is the command line interface to DigitlOcean's API.
+Pearl is a command line interface to DigitlOcean's API.
 
 ## Setup
 
 Run the following command to install
 
     $ gem install pearl
+
+Add your client id and api key as enviroment variables
+
+    ENV['DIGITAL_OCEAN_CLIENT_ID']
+    ENV['DIGITAL_OCEAN_API_KEY']
 
 ## Usage
 
@@ -18,67 +23,67 @@ To see all your droplets
 
 To view a droplet
 
-    $ pearl droplet -d 1
+    $ pearl droplet -d <droplet id>
 
 To create a droplet
 
-    $ pearl droplet add 'name' --size 1 --image 1 --region 1
+    $ pearl droplet add 'name' --size <size id> --image <image id> --region <region id>
 
     or
 
-    $ pearl droplet add 'name' -s 1 -i 1 -r 1
+    $ pearl droplet add 'name' -s <size id> -i <image id> -r <region id>
 
 Reboot a droplet
 
-    $ pearl droplet reboot -d 1
+    $ pearl droplet reboot -d <droplet id>
 
 Power cycle droplet
 
-    $ pearl droplet power cycle -d 1
+    $ pearl droplet power cycle -d <droplet id>
 
 Shutdown droplet
 
-    $ pearl droplet shutdown -d 1
+    $ pearl droplet shutdown -d <droplet id>
 
 Power Off droplet
 
-    $ pearl droplet power off -d 1
+    $ pearl droplet power off -d <droplet id>
 
 Power On droplet
 
-    $ pearl droplet power_on -d 1
+    $ pearl droplet power_on -d <droplet id>
 
 Reset root password
 
-    $ pearl droplet password_reset -d 1
+    $ pearl droplet password_reset -d <droplet id>
 
 Resize droplet
 
-    $ pearl droplet resize -d 1 --size 2
+    $ pearl droplet resize -d <droplet id> -s <size id>
 
 Take a snapshot
 
-    $ pearl droplet snapshot 'snapshot_name' -d 1
+    $ pearl droplet snapshot 'snapshot_name' -d <droplet id>
 
 Restore droplet
 
-    $ pearl droplet restore -d 1 --image 2
+    $ pearl droplet restore -d <droplet id> -i <image id>
 
 Rebuild droplet
 
-    $ pearl droplet rebuild -d 1 --image 2
+    $ pearl droplet rebuild -d <droplet id> -i <image id>
 
 Enable automatic backups
 
-    $ pearl droplet enable backups -d 1
+    $ pearl droplet enable backups -d <droplet id>
 
 Disable automatic backups
 
-    $ pearl droplet disable backups -d 1
+    $ pearl droplet disable backups -d <droplet id>
 
 Destroy droplet
 
-    $ pearl droplet destroy -d 1
+    $ pearl droplet destroy -d <droplet id>
 
 ### Regions
 
@@ -94,7 +99,7 @@ Display regions
 
 ### Images
 
-Display images
+Display all images
 
     $ pearl images
 
@@ -108,11 +113,11 @@ To display global images (default)
 
 View a single image
 
-    $ pearl image -i 1
+    $ pearl image -i <image id>
 
 To destroy an image
 
-    $ pearl image destroy -i 1
+    $ pearl image destroy -i <image id>
 
 ## Contributing
 
