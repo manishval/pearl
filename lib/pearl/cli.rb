@@ -57,8 +57,8 @@ module Pearl
               exit
             end
 
+            # Join command(s) to make it easier to catch using regex
             command = args.join(' ')
-            puts command
 
             case command.to_s
             when /\Adroplets\z/i

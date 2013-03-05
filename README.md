@@ -119,6 +119,11 @@ To destroy an image
 
     $ pearl image destroy -i <image id>
 
+## TODO
+
+* Format output instead of just printing the json response.
+* Add SSH resource.
+
 ## Contributing
 
 1. Fork it
