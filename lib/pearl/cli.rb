@@ -200,6 +200,7 @@ module Pearl
               exit
             else
               puts "Error: '#{command}' is an invalid command."
+              exit
             end
           end
         rescue Interrupt

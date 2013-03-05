@@ -29,10 +29,6 @@ module Pearl
 
       uri.query = URI.encode_www_form(params)
 
-      puts params
-      puts auth_params
-      puts uri.to_s
-
       request = Net::HTTP::Get.new(uri.request_uri)
 
       request['Content-Type'] = 'application/json'
