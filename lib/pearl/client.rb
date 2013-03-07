@@ -1,4 +1,7 @@
+require 'multi_json'
+
 require 'pearl/http'
+require 'pearl/pretty_table'
 
 module Pearl
   class Client
@@ -8,6 +11,8 @@ module Pearl
     include Images
     include Regions
     include Sizes
+
+    include PrettyTable
 
     attr_reader :client_id
     attr_reader :api_key

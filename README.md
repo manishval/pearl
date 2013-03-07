@@ -27,11 +27,11 @@ To view a droplet
 
 To create a droplet
 
-    $ pearl droplet add 'name' --size <size id> --image <image id> --region <region id>
+    $ pearl droplet add <name> --size <size id> --image <image id> --region <region id>
 
     or
 
-    $ pearl droplet add 'name' -s <size id> -i <image id> -r <region id>
+    $ pearl droplet add <name> -s <size id> -i <image id> -r <region id>
 
 Reboot a droplet
 
@@ -63,7 +63,7 @@ Resize droplet
 
 Take a snapshot
 
-    $ pearl droplet snapshot 'snapshot_name' -d <droplet id>
+    $ pearl droplet snapshot <snapshot name> -d <droplet id>
 
 Restore droplet
 
@@ -105,11 +105,11 @@ Display all images
 
 To display your images
 
-    $ pearl images --filter my
+    $ pearl images my
 
 To display global images (default)
 
-    $ pearl images --filter global
+    $ pearl images global
 
 View a single image
 
@@ -121,7 +121,7 @@ To destroy an image
 
 ## TODO
 
-* Format output instead of just printing the json response.
+* ~~Format output instead of just printing the json response.~~
 * Add SSH resource.
 
 ## Contributing

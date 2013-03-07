@@ -3,7 +3,8 @@ module Pearl
 
     module Regions
       def regions
-        puts request("regions").body
+        response = request("regions").body
+        pretty_table("Regions", response)
       end
     end
   end

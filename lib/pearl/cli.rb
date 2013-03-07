@@ -1,4 +1,4 @@
-require "optparse"
+require 'optparse'
 
 require 'pearl'
 
@@ -11,17 +11,11 @@ module Pearl
       region = nil
       size = nil
 
-      images_filter = nil
-
       opts = OptionParser.new do |opts|
         opts.banner = "Usage: pearl [resource] [options]"
 
         opts.on('-d', '--droplet [DROPLET ID]', 'Select the droplet with this id') do |d|
           droplet = d
-        end
-
-        opts.on('-f', '--filter', 'Display either your images or global images') do |filter|
-          images_filter = filter
         end
 
         opts.on('-h', '--help', 'Display this message') do
@@ -132,11 +126,11 @@ module Pearl
 
               Pearl.resize(droplet_id, size_id)
               exit
-            when /\Adroplet snapshot \w{3,}\z/i
+            when /\Adroplet snapshot [\w\s]{3,}\z/i
               droplet_id = droplet.to_i
               raise 'Error: Invalid droplet id.' if droplet_id == 0 || !droplet_id.is_a?(Fixnum)
 
-              name = command.split(' ', 2)
+              name = command.split(' ', 3)[2]
               raise 'Error: Invalid snapshot name.' if name.nil? || name.length <= 0
 
               Pearl.snapshot(droplet_id, name)
@@ -178,7 +172,13 @@ module Pearl
               Pearl.destroy_droplet(droplet_id)
               exit
             when /\Aimages\z/i
-              Pearl.images(images_filter)
+              Pearl.images
+              exit
+            when /\Aimages my\z/i
+              Pearl.images('my_images')
+              exit
+            when /\Aimages global\z/i
+              Pearl.images('global')
               exit
             when /\Aimage\z/i
               image_id = image.to_i

@@ -3,7 +3,8 @@ module Pearl
 
     module Sizes
       def sizes
-        puts request("sizes").body
+        response = request("sizes").body
+        pretty_table("Sizes", response)
       end
     end
   end
