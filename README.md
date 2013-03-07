@@ -51,11 +51,11 @@ Power Off droplet
 
 Power On droplet
 
-    $ pearl droplet power_on -d <droplet id>
+    $ pearl droplet power on -d <droplet id>
 
 Reset root password
 
-    $ pearl droplet password_reset -d <droplet id>
+    $ pearl droplet password reset -d <droplet id>
 
 Resize droplet
 
