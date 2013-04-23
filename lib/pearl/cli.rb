@@ -69,7 +69,7 @@ module Pearl
 
               Pearl.droplet(droplet_id)
               exit
-            when /\Adroplet add \w{4,}\z/i
+            when /\Adroplet add \w{3,}\z/i
               image_id = image.to_i
               raise 'Error: Invalid image id.' if image_id == 0 || !image_id.is_a?(Fixnum)
 
@@ -82,15 +82,12 @@ module Pearl
               name = command.split(' ', 3)[2]
               raise 'Error: Invalid droplet name.' if name.nil? || name.length <= 0
 
-
-              ssh_key_ids_param = ssh_key_ids.to_i
-
               options = {
                 name: name,
                 image_id: image_id,
                 region_id: region_id,
                 size_id: size_id,
-                ssh_key_ids: ssh_key_ids_param
+                ssh_key_ids: ssh_key_ids
               }
 
               Pearl.create_droplet(options)
@@ -210,13 +207,22 @@ module Pearl
               Pearl.regions
               exit
 
+            # SSH Keys
             when /\Asshkeys\z/i
               Pearl.sshkeys
               exit
+            when /\Asshkey\z/i
+              ssh_key_ids = ssh_key_ids.to_i
+              raise 'Error: Invalid SSH Key ID.' if ssh_key_ids == 0 || !ssh_key_ids.is_a?(Fixnum)
+              Pearl.view_sshkey(ssh_key_ids)
+              exit
 
+            # Sizes
             when /\Asizes\z/i
               Pearl.sizes
               exit
+
+            # Any other command
             else
               puts "Error: '#{command}' is an invalid command."
               exit
