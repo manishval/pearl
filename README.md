@@ -27,11 +27,11 @@ To view a droplet
 
 To create a droplet
 
-    $ pearl droplet add <name> --size <size id> --image <image id> --region <region id>
+    $ pearl droplet add <name> --size <size id> --image <image id> --region <region id> --ssh_key_ids <ssh key ids>
 
     or
 
-    $ pearl droplet add <name> -s <size id> -i <image id> -r <region id>
+    $ pearl droplet add <name> -s <size id> -i <image id> -r <region id> -k <ssh key ids>
 
 Reboot a droplet
 
