@@ -11,6 +11,7 @@ module Pearl
     include Images
     include Regions
     include Sizes
+    include Sshkeys
 
     include PrettyTable
 

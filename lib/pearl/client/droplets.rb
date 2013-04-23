@@ -16,7 +16,8 @@ module Pearl
         params = { name: options[:name],
                    size_id: options[:size_id],
                    image_id: options[:image_id],
-                   region_id: options[:region_id]
+                   region_id: options[:region_id],
+                   ssh_key_ids: options[:ssh_key_ids]
                  }
         response = request("droplets/new", params).body
         pretty_table("Droplet", response)

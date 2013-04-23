@@ -10,6 +10,7 @@ module Pearl
       image = nil
       region = nil
       size = nil
+      ssh_key_ids = nil
 
       opts = OptionParser.new do |opts|
         opts.banner = "Usage: pearl [resource] [options]"
@@ -33,6 +34,10 @@ module Pearl
 
         opts.on('-s', '--size [SIZE ID]', 'Set the size forthe droplet') do |s|
           size = s
+        end
+
+        opts.on('-k', '--ssh_key_ids [KEY ID]', 'SSH Keys to add to the machine') do |k|
+          ssh_key_ids = k
         end
 
         opts.on('-v', '--version', 'Display version') do
@@ -64,7 +69,7 @@ module Pearl
 
               Pearl.droplet(droplet_id)
               exit
-            when /\Adroplet add \w{3,}\z/i
+            when /\Adroplet add \w{4,}\z/i
               image_id = image.to_i
               raise 'Error: Invalid image id.' if image_id == 0 || !image_id.is_a?(Fixnum)
 
@@ -77,7 +82,16 @@ module Pearl
               name = command.split(' ', 3)[2]
               raise 'Error: Invalid droplet name.' if name.nil? || name.length <= 0
 
-              options = { name: name,  image_id: image_id, region_id: region_id, size_id: size_id }
+
+              ssh_key_ids_param = ssh_key_ids.to_i
+
+              options = {
+                name: name,
+                image_id: image_id,
+                region_id: region_id,
+                size_id: size_id,
+                ssh_key_ids: ssh_key_ids_param
+              }
 
               Pearl.create_droplet(options)
               exit
@@ -195,6 +209,11 @@ module Pearl
             when /\Aregions\z/i
               Pearl.regions
               exit
+
+            when /\Asshkeys\z/i
+              Pearl.sshkeys
+              exit
+
             when /\Asizes\z/i
               Pearl.sizes
               exit
