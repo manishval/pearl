@@ -1,24 +1,22 @@
 module Pearl
   class Client
 
-    module Sshkeys
+    module SshKeys
       
-      def sshkeys
+      def ssh_keys
         response = request("ssh_keys").body
         pretty_table("SSH Keys", response)
       end
 
-      def view_sshkey(id)
+      def ssh_key(id)
         response = request("ssh_keys/#{id}").body
-        data = MultiJson.load(response, symbolize_keys: true)
-        ssh_key = data[:ssh_key][:ssh_pub_key]
-        data[:ssh_key].delete :ssh_pub_key
-        pretty_table('ssh key', MultiJson.dump(data))
-        print "\n"
-        print ssh_key
-        print "\n\n"
+        pretty_table('SSH Key', response)
       end
 
+      def delete_ssh_key(id)
+        response = request("ssh_keys/#{id}/destroy").body
+        pretty_basic("Deleting ssh key #{id}", response)
+      end
     end
   end
 end
