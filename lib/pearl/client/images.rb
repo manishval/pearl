@@ -20,8 +20,8 @@ module Pearl
       end
 
       def destroy_image(id)
-        response = request("images/#{id}").body
-        pretty_table("Image", response)
+        response = request("images/#{id}/destroy").body
+        pretty_event("Destroying image #{id}", response)
       end
     end
   end
