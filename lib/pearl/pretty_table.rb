@@ -54,5 +54,16 @@ module Pearl
       table = Terminal::Table.new title: heading, headings: ['Status', 'Event ID'], rows: rows
       puts table
     end
+
+    def pretty_basic(heading = '', data)
+      # Convert JSON response into a hash for easier parsing
+      tmp = MultiJson.load(data, symbolize_keys: true)
+
+      rows = []
+      rows << [tmp[:status]]
+
+      table = Terminal::Table.new title: heading, rows: rows
+      puts table
+    end
   end
 end

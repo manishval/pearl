@@ -119,10 +119,23 @@ To destroy an image
 
     $ pearl image destroy -i <image id>
 
+### SSH Keys
+
+Display all ssh keys
+    
+    $ pearl ssh_keys
+
+To view a ssh key
+
+    $ pearl ssh_key -k <ssh_key_id>
+
+To delete a ssh key
+
+    $ paerl ssh_key destroy -k <ssh_key_id>
+
 ## TODO
 
 * ~~Format output instead of just printing the json response.~~
-* Add SSH resource.
 
 ## Contributing
 

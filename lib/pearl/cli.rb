@@ -11,6 +11,7 @@ module Pearl
       region = nil
       size = nil
       ssh_key_ids = nil
+      ssh_key_pub = nil
 
       opts = OptionParser.new do |opts|
         opts.banner = "Usage: pearl [resource] [options]"
@@ -32,11 +33,11 @@ module Pearl
           region = r
         end
 
-        opts.on('-s', '--size [SIZE ID]', 'Set the size forthe droplet') do |s|
+        opts.on('-s', '--size [SIZE ID]', 'Set the size for the droplet') do |s|
           size = s
         end
 
-        opts.on('-k', '--ssh_key_ids [KEY ID]', 'SSH Keys to add to the machine') do |k|
+        opts.on('-k', '--ssh_key_ids [KEY ID]', 'SSH Keys to add to the droplet') do |k|
           ssh_key_ids = k
         end
 
@@ -208,13 +209,19 @@ module Pearl
               exit
 
             # SSH Keys
-            when /\Asshkeys\z/i
-              Pearl.sshkeys
+            when /\Assh_keys\z/i
+              Pearl.ssh_keys
               exit
-            when /\Asshkey\z/i
+            when /\Assh_key\z/i
               ssh_key_ids = ssh_key_ids.to_i
               raise 'Error: Invalid SSH Key ID.' if ssh_key_ids == 0 || !ssh_key_ids.is_a?(Fixnum)
-              Pearl.view_sshkey(ssh_key_ids)
+              Pearl.ssh_key(ssh_key_ids)
+              exit
+
+            when /\Assh_key (destroy|delete)\z/i
+              ssh_key_ids = ssh_key_ids.to_i
+              raise 'Error: Invalid SSH Key ID.' if ssh_key_ids == 0 || !ssh_key_ids.is_a?(Fixnum)
+              Pearl.delete_ssh_key(ssh_key_ids)
               exit
 
             # Sizes
