@@ -70,7 +70,7 @@ module Pearl
 
               Pearl.droplet(droplet_id)
               exit
-            when /\Adroplet add \w{3,}\z/i
+            when /\Adroplet add [\w\-\.]{3,}\z/i
               image_id = image.to_i
               raise 'Error: Invalid image id.' if image_id == 0 || !image_id.is_a?(Fixnum)
 
