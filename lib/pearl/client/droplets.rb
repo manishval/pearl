@@ -60,7 +60,6 @@ module Pearl
       end
 
       def snapshot(id, name)
-        puts name
         params = { name: name }
         response = request("droplets/#{id}/snapshot", params).body
         pretty_event("Creating snapshot '#{name}' of droplet #{id}", response)
@@ -86,6 +85,12 @@ module Pearl
       def disable_backups(id)
         response = request("droplets/#{id}/disable_backups").body
         pretty_event("Disabling auto backups for droplet #{id}", response)
+      end
+
+      def rename(id, name)
+        params = { name: name }
+        response = request("droplets/#{id}/rename", params).body
+        pretty_event("Renaming droplet '#{id}' to #{name}", response)
       end
 
       def destroy_droplet(id)

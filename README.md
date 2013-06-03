@@ -81,6 +81,10 @@ Disable automatic backups
 
     $ pearl droplet disable backups -d <droplet id>
 
+Rename droplet
+
+    $ pearl droplet rename <name> -d <droplet id>
+
 Destroy droplet
 
     $ pearl droplet destroy -d <droplet id>
@@ -119,19 +123,27 @@ To destroy an image
 
     $ pearl image destroy -i <image id>
 
+To transfer an image
+
+    $ pearl image transfer -i <image id> -r <region id>
+
 ### SSH Keys
 
 Display all ssh keys
     
     $ pearl ssh_keys
 
+Add a ssh key
+
+    $ pearl ssh_key add <name> -p <public ssh key>
+
 To view a ssh key
 
-    $ pearl ssh_key -k <ssh_key_id>
+    $ pearl ssh_key -k <ssh key id>
 
 To delete a ssh key
 
-    $ paerl ssh_key destroy -k <ssh_key_id>
+    $ pearl ssh_key destroy -k <ssh key id>
 
 ## TODO
 

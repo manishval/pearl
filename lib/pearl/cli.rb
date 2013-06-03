@@ -11,7 +11,7 @@ module Pearl
       region = nil
       size = nil
       ssh_key_ids = nil
-      ssh_key_pub = nil
+      public_ssh_key = nil
 
       opts = OptionParser.new do |opts|
         opts.banner = "Usage: pearl [resource] [options]"
@@ -37,8 +37,12 @@ module Pearl
           size = s
         end
 
-        opts.on('-k', '--ssh_key_ids [KEY ID]', 'SSH Keys to add to the droplet') do |k|
+        opts.on('-k', '--ssh_key_ids [KEY ID]', 'SSH Keys for the droplet') do |k|
           ssh_key_ids = k
+        end
+
+        opts.on('-p', '--public_ssh_key [PUBLIC SSH KEY]', 'Public SSH Key to add to the droplet') do |k|
+          public_ssh_key = p
         end
 
         opts.on('-v', '--version', 'Display version') do
@@ -177,6 +181,15 @@ module Pearl
 
               Pearl.disable_backups(droplet_id)
               exit
+            when /\Adroplet rename [\w\s]{3,}\z/i
+              droplet_id = droplet.to_i
+              raise 'Error: Invalid droplet id.' if droplet_id == 0 || !droplet_id.is_a?(Fixnum)
+
+              name = command.split(' ', 3)[2]
+              raise 'Error: Invalid droplet name.' if name.nil? || name.length <= 0
+
+              Pearl.rename(droplet_id, name)
+              exit
             when /\Adroplet (destroy|delete)\z/i
               droplet_id = droplet.to_i
               raise 'Error: Invalid droplet id.' if droplet_id == 0 || !droplet_id.is_a?(Fixnum)
@@ -204,6 +217,15 @@ module Pearl
 
               Pearl.destroy_image(image_id)
               exit
+            when /\Aimage (transfer)\z/i
+              image_id = image.to_i
+              raise 'Error: Invalid image id.' if image_id == 0 || !image_id.is_a?(Fixnum)
+
+              region_id = region.to_i
+              raise 'Error: Invalid region id.' if region_id == 0 || !region_id.is_a?(Fixnum)
+
+              Pearl.transfer(image_id, region_id)
+              exit
             when /\Aregions\z/i
               Pearl.regions
               exit
@@ -217,7 +239,14 @@ module Pearl
               raise 'Error: Invalid SSH Key ID.' if ssh_key_ids == 0 || !ssh_key_ids.is_a?(Fixnum)
               Pearl.ssh_key(ssh_key_ids)
               exit
+            when /\sssh_key add [\w\-\.]{3,}\z/i
+              name = command.split(' ', 3)[2]
+              raise 'Error: Invalid ssh key name.' if name.nil? || name.length <= 0
 
+              raise 'Error: Invalid public ssh key id.' if public_ssh_key.nil? || public_ssh_key.nil?
+
+              Pearl.add_ssh_key(name, public_ssh_key)
+              exit
             when /\Assh_key (destroy|delete)\z/i
               ssh_key_ids = ssh_key_ids.to_i
               raise 'Error: Invalid SSH Key ID.' if ssh_key_ids == 0 || !ssh_key_ids.is_a?(Fixnum)

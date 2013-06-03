@@ -23,6 +23,12 @@ module Pearl
         response = request("images/#{id}/destroy").body
         pretty_event("Destroying image #{id}", response)
       end
+
+      def transfer(id, region)
+        params = { region_id: region }
+        response = request("images/#{id}/transfer", params).body
+        pretty_event("Transferring image '#{id}' to region #{region}", response)
+      end
     end
   end
 end
